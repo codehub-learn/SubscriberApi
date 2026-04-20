@@ -1,0 +1,39 @@
+@SubscriberApi_HostAddress = https://localhost:7030
+@loanId = ee9eb8c4-cc0b-4e52-9ed7-6c628078559c
+
+GET {{SubscriberApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+
+GET {{SubscriberApi_HostAddress}}/api/Loans/
+Accept: application/json
+
+###
+GET {{SubscriberApi_HostAddress}}/api/Loans/{{loanId}}
+Accept: application/json
+
+
+###
+POST {{SubscriberApi_HostAddress}}/api/Loans/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "borrowerName": "John Doe",
+  "amount": 15000
+}
+
+###
+PUT {{SubscriberApi_HostAddress}}/api/Loans/{{loanId}}
+Content-Type: application/json
+
+{
+  "borrowerName": "Updated Name",
+  "amount": 20000
+}
+
+
+###
+DELETE {{SubscriberApi_HostAddress}}/api/Loans/{{loanId}}
