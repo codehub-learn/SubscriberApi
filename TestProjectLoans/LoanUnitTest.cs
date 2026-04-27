@@ -7,7 +7,7 @@ namespace TestProjectLoans;
 public class LoanUnitTest
 {
 
-         
+
 
     [Fact]
     public void ShouldCalculateInterestCorrectly()
@@ -18,17 +18,24 @@ public class LoanUnitTest
         Assert.Equal(expectedValue, calculatedValue);
     }
 
-    [Fact]
-    public void EvaluateLoan_ShouldApprove_WhenAllCriteriaMet()
-    {
-        var   _service = new LoanService(new LoggerFactory().CreateLogger<LoanService>());
-        var command = new CreateLoanCommand { 
-            Amount = 1000, 
-            BorrowerName="User", 
-            CreditScore=600, 
-            DurationMonths=36
-        };
-        Assert.True(_service.EvaluateLoan(command).Approved);
-    }
 
+    //Boundary value (Credit score just below approval threshold)
+    [Theory]
+    [InlineData(499, false)]
+    [InlineData(500, true)]   //Happy path (Nominal values)
+    [InlineData(601, true)]
+    public void EvaluateLoan_BoundaryCases(int creditScore, bool expectedApproval)
+    {
+        var _service = new LoanService(new LoggerFactory().CreateLogger<LoanService>());
+        var command = new CreateLoanCommand
+        {
+            Amount = 1000,
+            BorrowerName = "User",
+            CreditScore = creditScore,
+            DurationMonths = 36
+        };
+
+
+        Assert.Equal(expectedApproval, _service.EvaluateLoan(command).Approved);
+    }
 }
