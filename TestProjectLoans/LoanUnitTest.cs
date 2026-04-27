@@ -1,8 +1,14 @@
-﻿using SubscriberApi.Models;
+﻿using Microsoft.Extensions.Logging;
+using SubscriberApi.BusinessServices;
+using SubscriberApi.Models;
+using SubscriberApi.Requests;
 namespace TestProjectLoans;
 
 public class LoanUnitTest
 {
+
+         
+
     [Fact]
     public void ShouldCalculateInterestCorrectly()
     {
@@ -12,6 +18,17 @@ public class LoanUnitTest
         Assert.Equal(expectedValue, calculatedValue);
     }
 
-
+    [Fact]
+    public void EvaluateLoan_ShouldApprove_WhenAllCriteriaMet()
+    {
+        var   _service = new LoanService(new LoggerFactory().CreateLogger<LoanService>());
+        var command = new CreateLoanCommand { 
+            Amount = 1000, 
+            BorrowerName="User", 
+            CreditScore=600, 
+            DurationMonths=36
+        };
+        Assert.True(_service.EvaluateLoan(command).Approved);
+    }
 
 }

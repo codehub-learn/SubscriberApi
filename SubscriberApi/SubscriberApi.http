@@ -1,5 +1,5 @@
 @SubscriberApi_HostAddress = https://localhost:7030
-@loanId = ee9eb8c4-cc0b-4e52-9ed7-6c628078559c
+@loanId = 3730107a-9dac-48e4-b28f-5a22568438dc
 
 GET {{SubscriberApi_HostAddress}}/weatherforecast/
 Accept: application/json
