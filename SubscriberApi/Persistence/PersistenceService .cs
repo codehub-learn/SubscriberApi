@@ -24,7 +24,7 @@ public class PersistenceService : IPersistenceService
         where T : class
     {
         return await _context.Set<T>()
-            .AsNoTracking()
+         .AsNoTracking()
             .ToListAsync(cancellationToken);
     }
 
