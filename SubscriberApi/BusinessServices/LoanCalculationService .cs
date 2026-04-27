@@ -7,14 +7,19 @@ using SubscriberApi.Requests;
 
 
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 public class LoanService : ILoanService
 {
     private readonly ILogger<LoanService> _logger;
+    private readonly ICreditScoreService _creditService;
+    private readonly IFraudService _fraudService;
 
-    public LoanService(ILogger<LoanService> logger)
+    public LoanService(ILogger<LoanService> logger, ICreditScoreService creditService, IFraudService fraudService )
     {
         _logger = logger;
+        _creditService = creditService;
+        _fraudService = fraudService;
     }
 
     public LoanDecisionResult EvaluateLoan(CreateLoanCommand command)
@@ -27,6 +32,27 @@ public class LoanService : ILoanService
             // VALIDATION
             // =========================
             Validate(command);
+
+            var creditScore = _creditService.GetCreditScore(command.BorrowerId);
+            var isFraudulent = _fraudService.IsFraudulent(command.BorrowerId);
+
+            command.CreditScore = creditScore;
+            _logger.LogInformation(
+                "Credit score retrieved: {CreditScore}, Fraud check result: {IsFraudulent}",
+                creditScore, isFraudulent);
+
+            if (isFraudulent)
+            {
+                _logger.LogWarning("Loan rejected due to fraud suspicion for borrower: {Borrower}", command.BorrowerName);
+                return new LoanDecisionResult
+                {
+                    Approved = false,
+                    Reason = "Fraud suspicion",
+                    MonthlyInstallment = 0,
+                    Loan = null
+                };
+            }
+
 
             // =========================
             // DECISION

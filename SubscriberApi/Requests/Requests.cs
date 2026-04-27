@@ -16,6 +16,7 @@ public class UpdateLoanRequest
 
 public class CreateLoanCommand
 {
+    public int BorrowerId { get; set; }
     public string BorrowerName { get; set; } = string.Empty;
     public decimal Amount { get; set; }
     public int DurationMonths { get; set; }

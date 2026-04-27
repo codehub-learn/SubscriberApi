@@ -11,3 +11,13 @@ public interface ILoanService
     /// <returns>A <see cref="LoanDecisionResult"/> containing the decision and related information.</returns>
     LoanDecisionResult EvaluateLoan(CreateLoanCommand command);
 }
+
+public interface ICreditScoreService
+{
+    int GetCreditScore(int applicantId);
+}
+
+public interface IFraudService
+{
+    bool IsFraudulent(int applicantId);
+}
