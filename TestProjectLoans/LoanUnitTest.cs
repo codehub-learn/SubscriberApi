@@ -79,7 +79,7 @@ public class LoanUnitTest
 
         Assert.NotNull(result);
         Assert.True(result.Approved);
-        Assert.Equal(36, result.MonthlyInstallment);
+        Assert.Equal(36, result.Loan.DurationMonths);
     }
 
 
