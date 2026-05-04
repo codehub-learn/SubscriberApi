@@ -14,12 +14,15 @@ public class LoanService : ILoanService
     private readonly ILogger<LoanService> _logger;
     private readonly ICreditScoreService _creditService;
     private readonly IFraudService _fraudService;
+    private readonly IRiskEngine _riskEngine;
 
-    public LoanService(ILogger<LoanService> logger, ICreditScoreService creditService, IFraudService fraudService )
+    public LoanService(ILogger<LoanService> logger, ICreditScoreService creditService,
+        IFraudService fraudService , IRiskEngine riskEngine)
     {
         _logger = logger;
         _creditService = creditService;
         _fraudService = fraudService;
+        _riskEngine = riskEngine;
     }
 
     public LoanDecisionResult EvaluateLoan(CreateLoanCommand command)

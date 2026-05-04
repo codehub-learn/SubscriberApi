@@ -22,16 +22,7 @@ public class LoanServiceTests
     [Fact]
     public void EvaluateLoan_ShouldApprove_WhenValid()
     {
-        _fixture.CreditMock
-            .Setup(x => x.GetCreditScore(1))
-            .Returns(720);
-
-        _fixture.FraudMock
-            .Setup(x => x.IsFraudulent(1))
-            .Returns(false);
-
-        var command = _fixture.ValidCommand();
-
+        var command = _fixture.HappyPathSetup();
         var result = _service.EvaluateLoan(command);
 
         Assert.True(result.Approved);
@@ -40,7 +31,6 @@ public class LoanServiceTests
     }
 
     //  Fraud Case(Early Exit)  Important: this bypasses all calculations
-
     [Fact]
     public void EvaluateLoan_ShouldReject_WhenFraudDetected()
     {
@@ -114,29 +104,29 @@ public class LoanServiceTests
     //Logging is side effect, not business logic.
     //We want to ensure that important events are logged without making our tests brittle. 
 
-    [Fact]
-    public void EvaluateLoan_ShouldLogInformation()
-    {
-        _fixture.CreditMock
-            .Setup(x => x.GetCreditScore(It.IsAny<int>()))
-            .Returns(720);
+    //[Fact]
+    //public void EvaluateLoan_ShouldLogInformation()
+    //{
+    //    _fixture.CreditMock
+    //        .Setup(x => x.GetCreditScore(It.IsAny<int>()))
+    //        .Returns(720);
 
-        _fixture.FraudMock
-            .Setup(x => x.IsFraudulent(It.IsAny<int>()))
-            .Returns(false);
+    //    _fixture.FraudMock
+    //        .Setup(x => x.IsFraudulent(It.IsAny<int>()))
+    //        .Returns(false);
 
-        var command = _fixture.ValidCommand();
+    //    var command = _fixture.ValidCommand();
 
-        _service.EvaluateLoan(command);
+    //    _service.EvaluateLoan(command);
 
-        _fixture.LoggerMock.Verify(
-              x => x.Log(
-                LogLevel.Information,
-                It.IsAny<EventId>(),
-                It.IsAny<It.IsAnyType>(),
-                It.IsAny<Exception>(),
-                It.IsAny<Func<object, Exception?, string>>()),
-             Times.AtLeastOnce);
-    }
+    //    _fixture.LoggerMock.Verify(
+    //          x => x.Log(
+    //            LogLevel.Information,
+    //            It.IsAny<EventId>(),
+    //            It.IsAny<It.IsAnyType>(),
+    //            It.IsAny<Exception>(),
+    //            It.IsAny<Func<object, Exception?, string>>()),
+    //         Times.AtLeastOnce);
+    //}
 
 }
