@@ -17,23 +17,27 @@ Session 1
 Session 2
 	Unit Testing
 		testing the services
-		mocking the repositories
-		
-
-
-
-
-		
-
-
-
+		mocking the dependencies
+	
 Session 3
+
+Problems
+Same setup repeated in every test
+Hard to maintain if constructor changes
+Easy to introduce inconsistencies
+Tests become noisy → hard to read logic
+
+
+		✔ Fixture class to centralize mocks/setup
+		✔ Proper test isolation + reuse
+
+Session 4
+
 	Authentication and Authorization
 		JWT
 		Role-based access control
 		Session management
 
-Session 4
 	Deployment
 		Containerization with Docker
 		CI/CD pipelines

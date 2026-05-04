@@ -75,7 +75,7 @@ public class LoanUnitTest
         _creditMock.Setup(x => x.GetCreditScore(It.IsAny<int>())).Returns(500);
         _fraudMock.Setup(x => x.IsFraudulent(It.IsAny<int>())).Returns(false);
 
-        var result = _service.EvaluateLoan(validCommand());
+        var result = _service.EvaluateLoan(_validCommand());
 
         Assert.NotNull(result);
         Assert.True(result.Approved);
@@ -83,7 +83,7 @@ public class LoanUnitTest
     }
 
 
-    private CreateLoanCommand validCommand()
+    private CreateLoanCommand _validCommand()
     {
         return new CreateLoanCommand
         {
