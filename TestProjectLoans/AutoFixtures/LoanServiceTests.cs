@@ -95,6 +95,9 @@ public class LoanServiceTests : AutoFixtureTestBase
     [Fact]
     public void EvaluateLoan_ShouldThrow_WhenInvalidAmount()
     {
+
+        // Arrange
+
         var command = Fixture.Build<CreateLoanCommand>()
             .With(x => x.Amount, 0)
             .With(x => x.CreditScore, 700)
@@ -102,8 +105,10 @@ public class LoanServiceTests : AutoFixtureTestBase
             .With(x => x.BorrowerName, "John")
             .Create();
 
+        // Act
         Action act = () => _service.EvaluateLoan(command);
 
+        // Assert
         act.Should().Throw<ArgumentException>();
     }
 }

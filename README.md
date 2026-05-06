@@ -30,8 +30,13 @@ Tests become noisy → hard to read logic
 
 		✔ Fixture class to centralize mocks/setup
 		✔ Proper test isolation + reuse
-
+		Autofixture
 Session 4
+
+
+
+
+
 
 	Authentication and Authorization
 		JWT
