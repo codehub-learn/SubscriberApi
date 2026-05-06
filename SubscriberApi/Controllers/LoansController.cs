@@ -7,11 +7,11 @@ using SubscriberApi.Requests;
 
 [ApiController]
 [Route("api/[controller]")]
-public class LoansController : ControllerBase
+public class Loans2Controller : ControllerBase
 {
     private readonly IPersistenceService _persistenceService;
 
-    public LoansController(IPersistenceService persistenceService)
+    public Loans2Controller(IPersistenceService persistenceService)
     {
         _persistenceService = persistenceService;
     }

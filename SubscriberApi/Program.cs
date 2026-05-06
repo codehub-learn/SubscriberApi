@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SubscriberApi.BusinessServices;
 using SubscriberApi.Data;
 using SubscriberApi.Persistence;
 
@@ -13,6 +14,8 @@ builder.Services.AddOpenApi();
 
 
 builder.Services.AddScoped<IPersistenceService, PersistenceService>();
+builder.Services.AddScoped<PersistentLoanService, PersistentLoanService>();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"),

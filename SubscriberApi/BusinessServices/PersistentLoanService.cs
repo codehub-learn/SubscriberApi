@@ -28,4 +28,9 @@ public class PersistentLoanService
     {
         return await _db.Loans.CountAsync();
     }
+
+    public async Task<List<Loan>> GetAll()
+    {
+        return await _db.Loans.ToListAsync();
+    }
 }
