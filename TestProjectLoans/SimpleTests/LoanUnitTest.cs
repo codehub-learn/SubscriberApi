@@ -3,7 +3,7 @@ using Moq;
 using SubscriberApi.BusinessServices;
 using SubscriberApi.Models;
 using SubscriberApi.Requests;
-namespace TestProjectLoans;
+namespace TestProjectLoans.SimpleTests;
 
 public class LoanUnitTest
 {
