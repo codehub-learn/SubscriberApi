@@ -33,23 +33,29 @@ Tests become noisy → hard to read logic
 		Autofixture
 Session 4
 
+	TestContainers
+	
 
 
 
+Session 5
+	WebTests
+		Testing the API end-to-end
+		Integration tests with TestServer
+		Testing with real HTTP requests
 
-
-	Authentication and Authorization
+	Testing
+		Authentication and Authorization
 		JWT
 		Role-based access control
-		Session management
+
+Session 6
+
+ 
 
 	Deployment
 		Containerization with Docker
 		CI/CD pipelines
 		Monitoring and logging
 
-Session 5
-	Advanced Topics
-		GraphQL
-		WebSockets
-		Serverless architecture
+ 
