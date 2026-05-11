@@ -24,6 +24,12 @@ public class LoanApiTests
         // Act
         var response = await _client.GetAsync("/api/loans", TestContext.Current.CancellationToken);
 
+
+        //List<Loan> loans = response
+
+
+
+
         // Assert
         Assert.Equal(
             HttpStatusCode.OK,

@@ -1,5 +1,6 @@
 @SubscriberApi_HostAddress = https://localhost:7030
 @loanId = 3730107a-9dac-48e4-b28f-5a22568438dc
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTc3ODUxNzcwMywiaXNzIjoiTXlBcHAiLCJhdWQiOiJNeUFwcFVzZXJzIn0.p0Pp3KcoykmjFXvfz-kLcv5ej2PZSTaDLZQeR-CGNL8
 
 GET {{SubscriberApi_HostAddress}}/weatherforecast/
 Accept: application/json
@@ -37,3 +38,27 @@ Content-Type: application/json
 
 ###
 DELETE {{SubscriberApi_HostAddress}}/api/Loans/{{loanId}}
+
+
+###
+POST {{SubscriberApi_HostAddress}}/api/auth/login/
+Content-Type: application/json
+Accept: application/json
+{
+  "username": "testuser",
+  "password": "testpassword"
+}
+
+###
+POST {{SubscriberApi_HostAddress}}/api/auth/login/
+Content-Type: application/json
+Accept: application/json
+{
+  "username": "admin",
+  "password": "1234"
+}
+
+###
+GET {{SubscriberApi_HostAddress}}/api/auth/secureMessage/
+Content-Type: application/json
+Authorization: Bearer {{token}}
